@@ -1,0 +1,1 @@
+AI-powered desktop app that converts online videos into structured notes using Google Gemini AI. Features 6 note-taking styles, Tkinter GUI, and yt-dlp integration.

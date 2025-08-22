@@ -1,6 +1,18 @@
 # VidAI
 
-VidAI is a Python desktop application that generates structured notes from online videos using Gemini AI. It features a simple graphical user interface (GUI) built with Tkinter, lets you choose your preferred note-taking style and Gemini model, and saves your notes to a file. The app handles video downloading, AI interaction, and note formatting automatically.
+**Transform videos into intelligent notes with AI**
+
+VidAI is a powerful Python desktop application that automatically converts online videos into structured, intelligent notes using Google Gemini AI. Whether you're a student capturing lecture content, a professional documenting meetings, or a researcher extracting insights from video materials, VidAI streamlines the note-taking process with advanced AI technology.
+
+## ✨ Key Features
+
+- 🤖 **AI-Powered Analysis**: Leverages Google Gemini AI for accurate video content understanding
+- 📝 **6 Note-Taking Styles**: Choose from Concise, Simple, Bullet Points, Outline, Detailed, or Summary formats
+- 🎬 **Universal Video Support**: Works with any video URL supported by yt-dlp (YouTube, Vimeo, and more)
+- 🖥️ **User-Friendly GUI**: Clean, intuitive Tkinter interface with real-time processing updates
+- ⚡ **Multiple AI Models**: Support for latest Gemini models (2.5-pro, 2.5-flash, 2.0-flash variants)
+- 💾 **Local Processing**: Secure local storage with automatic temporary file cleanup
+- 🔧 **Easy Setup**: Simple API key management through GUI or environment files
 
 <!-- <img src="" alt="VidAI Demo" width="1000"/> -->
 
@@ -62,9 +74,39 @@ To use VidAI:
 4. Click "Generate Notes" to start processing.
 5. When finished, choose where to save your notes as a `.txt` file.
 
-## Additional Notes
+## 📋 Note-Taking Styles
 
-- The app uses `yt-dlp` to download videos and Gemini AI for note generation.
-- Only public video URLs supported by `yt-dlp` can be processed.
-- Your API key is stored locally in the `.env` file.
-- **Be cautious:** Generated notes are based on AI interpretation and may not be 100% accurate
+VidAI offers six distinct note-taking approaches to match your specific needs:
+
+| Style | Description | Best For |
+|-------|-------------|----------|
+| **Concise** | Ultra-brief, essential points only | Quick reference, key takeaways |
+| **Simple** | Beginner-friendly, plain language | General understanding, accessible content |
+| **Bullet Points** | Well-structured, organized lists | Easy scanning, presentation materials |
+| **Outline** | Hierarchical format with headings | Academic notes, structured learning |
+| **Detailed** | Comprehensive, thorough documentation | Research, in-depth analysis |
+| **Summary** | High-level paragraph summaries | Executive briefings, overviews |
+
+## 📌 Additional Information
+
+### Technical Details
+- Built with Python 3.13.5+ for optimal performance
+- Uses `yt-dlp` for robust video downloading from major platforms
+- Powered by Google Gemini AI for intelligent content analysis
+- Temporary files are automatically cleaned up after processing
+
+### Supported Platforms
+- ✅ YouTube, Vimeo, and other yt-dlp compatible sites
+- ✅ Windows, macOS, and Linux operating systems
+- ✅ Various video formats and resolutions
+
+### Privacy & Security
+- 🔒 API keys stored locally in `.env` files
+- 🗑️ Temporary video files automatically deleted
+- 📱 No cloud storage of personal content
+- 🛡️ Secure local processing only
+
+### Important Notes
+- **Accuracy**: Generated notes are AI-powered and may not be 100% accurate
+- **Internet Required**: Active connection needed for video download and AI processing
+- **API Limits**: Subject to Google Gemini AI usage limits and pricing
