@@ -19,6 +19,10 @@ GEMINI_MODELS: tuple = ('gemini-2.5-pro',
                 'gemini-2.0-flash-lite')
 
 class NoteTakingMethod(Enum):
+    '''
+    Enum representing different note-taking methods.
+    '''
+
     CONCISE = 'concise'
     SIMPLE = 'simple'
     BULLET_POINTS = 'bullet_points'
@@ -27,6 +31,10 @@ class NoteTakingMethod(Enum):
     SUMMARY = 'summary'
 
     def getPrompt(self) -> str:
+        '''
+        Returns the prompt string for the current note-taking method from the JSON file.
+        '''
+
         with open('note-taking-prompts.json', 'r') as jsonFile:
             methods = json.load(jsonFile)
 
@@ -35,6 +43,10 @@ class NoteTakingMethod(Enum):
                 return method['prompt']
             
     def getPrettyString(self) -> str:
+        '''
+        Returns a human-readable string for the current note-taking method.
+        '''
+
         if self == NoteTakingMethod.CONCISE:
             return 'Concise'
         elif self == NoteTakingMethod.SIMPLE:
@@ -49,6 +61,16 @@ class NoteTakingMethod(Enum):
             return 'Summary'
 
 def convertPrettyStringToMethod(prettyString: str) -> NoteTakingMethod | None:
+    '''
+    Converts a pretty string to its corresponding NoteTakingMethod enum value.
+
+    Args:
+        prettyString (str): The human-readable string for the note-taking method.
+
+    Returns:
+        NoteTakingMethod | None: The corresponding enum value, or None if not found.
+    '''
+
     mapping = {
         'Concise': NoteTakingMethod.CONCISE,
         'Simple': NoteTakingMethod.SIMPLE,
@@ -60,15 +82,33 @@ def convertPrettyStringToMethod(prettyString: str) -> NoteTakingMethod | None:
     return mapping.get(prettyString, None)
 
 def setApiKey(api_key: str) -> None:
+    '''
+    Sets the Gemini API key in the .env file and reloads environment variables.
+
+    Args:
+        api_key (str): The API key to set.
+    '''
+
     apiKey: str = api_key
     with open('.env', 'w') as envFile:
         envFile.write(f'GEMINI_API_KEY={apiKey}\n')
     load_dotenv(override=True)
 
 def isApiKeySet() -> bool:
+    '''
+    Checks if the Gemini API key is set.
+
+    Returns:
+        bool: True if the API key is set, False otherwise.
+    '''
+
     return not (GEMINI_API_KEY == '' or GEMINI_API_KEY is None)
 
 def clearTmp() -> None:
+    '''
+    Deletes the temporary directory if it exists.
+    '''
+
     tmpPath: Path = Path('tmp')
     if tmpPath.exists():
         shutil.rmtree(tmpPath)
@@ -161,11 +201,3 @@ def takeNotes(url: str, method: NoteTakingMethod=NoteTakingMethod.SIMPLE, model:
         return response.text
     else:
         return None
-
-if __name__ == '__main__':
-    videoURL: str = 'https://www.youtube.com/watch?v=4qGrteTY1EM'
-    notes: str = takeNotes(videoURL, NoteTakingMethod.SIMPLE)
-    print(f'\n{notes}')
-
-    with open('notes.txt', 'w') as f:
-        f.write(notes)

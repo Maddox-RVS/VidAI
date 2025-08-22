@@ -5,24 +5,41 @@ from tkinter import *
 import backend
 
 def getStyleOptions() -> list[str]:
+    '''
+    Returns a list of human-readable note-taking style options.
+    '''
+
     styles: list[str] = []
     for method in backend.NoteTakingMethod:
         styles.append(method.getPrettyString())
     return styles
 
 def getModelOptions() -> list[str]:
+    '''
+    Returns a list of available Gemini model options.
+    '''
+
     models: list[str] = []
     for model in backend.GEMINI_MODELS:
         models.append(model)
     return models
 
 def onPressSetApiKey() -> None:
+    '''
+    Prompts the user to enter an API key and sets it using the backend.
+    '''
+
     apiKey = simpledialog.askstring("Set API Key", "Enter your API key:")
     if apiKey:
         backend.setApiKey(apiKey)
         print("API Key set successfully.")
 
 def onPressGenerateNotes() -> None:
+    '''
+    Handles the process of generating notes from a video URL using the selected style and model.
+    Disables buttons during processing and saves notes to a file if successful.
+    '''
+    
     urlLabel.config(text='Enter URL:')
     url = urlTextbox.get("1.0", "end").strip()
     style = styleVar.get()
@@ -57,6 +74,9 @@ def onPressGenerateNotes() -> None:
 root = Tk()
 root.title('Video Note Taker')
 root.geometry('550x225')
+
+icon = PhotoImage(file='icon.png')
+root.iconphoto(True, icon)
 
 mainFrame = ttk.Frame(root, padding=10)
 mainFrame.grid(sticky='nsew')
