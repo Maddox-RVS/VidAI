@@ -39,7 +39,7 @@ def onPressGenerateNotes() -> None:
     Handles the process of generating notes from a video URL using the selected style and model.
     Disables buttons during processing and saves notes to a file if successful.
     '''
-    
+
     urlLabel.config(text='Enter URL:')
     url = urlTextbox.get("1.0", "end").strip()
     style = styleVar.get()
@@ -74,9 +74,7 @@ def onPressGenerateNotes() -> None:
 root = Tk()
 root.title('Video Note Taker')
 root.geometry('550x225')
-
-icon = PhotoImage(file='icon.png')
-root.iconphoto(True, icon)
+root.iconbitmap('icon.ico')
 
 mainFrame = ttk.Frame(root, padding=10)
 mainFrame.grid(sticky='nsew')
