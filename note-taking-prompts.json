@@ -1,0 +1,26 @@
+[
+    {
+        "method": "concise",
+        "prompt": "Write extremely short and focused notes. Use as few words as possible while keeping the meaning intact. Only include the most critical ideas from the video. Do not add explanations, examples, or extra details unless absolutely necessary."
+    },
+    {
+        "method": "simple",
+        "prompt": "Write easy-to-understand notes using plain, beginner-friendly language. Avoid technical jargon unless explained in the video. Keep sentences short and clear. Include only the essential information and avoid unnecessary complexity."
+    },
+    {
+        "method": "bullet_points",
+        "prompt": "Summarize the video using clear, well-structured bullet points. Each point should represent one key idea or fact. Be concise but informative, avoiding long paragraphs. Use sub-bullets if necessary to organize related details."
+    },
+    {
+        "method": "outline",
+        "prompt": "Write structured notes in an outline format using hierarchical headings and indentation.\nExample structure:\n - Main Topic\n\t - Subtopic A\n\t\t - Key Point 1\n\t\t - Key Point 2\n\t - Subtopic B\n\t\t - Supporting Details\n\t\t   This method should show relationships between concepts and organize information logically."
+    },
+    {
+        "method": "detailed",
+        "prompt": "Write comprehensive, highly detailed notes covering all important points, explanations, and examples from the video. Include relevant terminology, reasoning, and step-by-step processes if applicable. Do not oversimplify — aim for accuracy and completeness."
+    },
+    {
+        "method": "summary",
+        "prompt": "Write a high-level summary of the video in paragraph form. Focus on main ideas, arguments, and conclusions rather than small details. Keep it clear, cohesive, and easy to read. Use 1–3 concise paragraphs depending on video length."
+    }
+]
