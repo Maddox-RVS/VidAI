@@ -212,6 +212,3 @@ def takeNotes(url: str, method: NoteTakingMethod=NoteTakingMethod.SIMPLE, model:
         return response.text
     else:
         return None
-
-if __name__ == '__main__':
-    clearTmp()
