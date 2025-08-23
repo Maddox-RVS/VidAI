@@ -1,3 +1,5 @@
+from rich.console import Console
+from rich.spinner import Spinner
 from dotenv import load_dotenv
 from pathlib import Path
 from google import genai
@@ -11,6 +13,8 @@ import os
 load_dotenv()
 GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY")
 TEMP_VIDEOS_PATH: Path = Path('tmpVids')
+
+CONSOLE: Console = Console()
 
 GEMINI_MODELS: tuple = ('gemini-2.5-pro',
                 'gemini-2.5-flash',
@@ -109,9 +113,12 @@ def clearTmp() -> None:
     Deletes the temporary directory if it exists.
     '''
 
-    tmpPath: Path = Path('tmp')
-    if tmpPath.exists():
-        shutil.rmtree(tmpPath)
+    if TEMP_VIDEOS_PATH.exists() and TEMP_VIDEOS_PATH.is_dir():
+        for item in TEMP_VIDEOS_PATH.iterdir():
+            if item.is_file() or item.is_symlink():
+                item.unlink()
+            elif item.is_dir():
+                shutil.rmtree(item)
 
 def download(url: str) -> tuple[bool, Path]:
     '''
@@ -141,7 +148,7 @@ def download(url: str) -> tuple[bool, Path]:
         clearTmp()
         return (False, None)
 
-def waitForActive(client: genai.Client, fileObj, timeout: float = 30.0) -> bool:
+def waitForActive(client: genai.Client, fileObj, timeout: float = 120.0) -> bool:
     '''
     Waits until the uploaded file is ACTIVE or times out.
 
@@ -150,11 +157,14 @@ def waitForActive(client: genai.Client, fileObj, timeout: float = 30.0) -> bool:
     '''
 
     start = time.time()
-    while time.time() - start < timeout:
-        fileStatus = client.files.get(name=fileObj.name)
-        if getattr(fileStatus, "state", None) == "ACTIVE":
-            return True
-        time.sleep(1)
+
+    with CONSOLE.status('Waiting for video to be in ACTIVE state...', spinner='line', spinner_style='white') as status:
+        while time.time() - start < timeout:
+            fileStatus = client.files.get(name=fileObj.name)
+            if getattr(fileStatus, "state", None) == "ACTIVE":
+                return True
+            time.sleep(1)
+
     return False
 
 def takeNotes(url: str, method: NoteTakingMethod=NoteTakingMethod.SIMPLE, model: str = 'gemini-2.5-flash-lite') -> str:
@@ -191,13 +201,17 @@ def takeNotes(url: str, method: NoteTakingMethod=NoteTakingMethod.SIMPLE, model:
             return None
 
         print('Generating notes...')
-        response = client.models.generate_content(
-            model=model,
-            contents=[videoFile, SYSTEM_PROMPT])
-        print('Notes generated successfully.')
-        
-        clearTmp()
+        try:
+            response = client.models.generate_content(
+                model=model,
+                contents=[videoFile, SYSTEM_PROMPT])
+            print('Notes generated successfully.')
+        finally:
+            clearTmp()
 
         return response.text
     else:
         return None
+
+if __name__ == '__main__':
+    clearTmp()
