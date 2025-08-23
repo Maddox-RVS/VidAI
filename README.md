@@ -67,4 +67,4 @@ To use VidAI:
 - The app uses `yt-dlp` to download videos and Gemini AI for note generation.
 - Only public video URLs supported by `yt-dlp` can be processed.
 - Your API key is stored locally in the `.env` file.
-- **Be cautious:** Generated notes are based on AI interpretation and may not be 100% accurate
+- **Be cautious:** Generated notes are based on AI interpretation and may not be 100% accurate.
