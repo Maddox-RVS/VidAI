@@ -2,7 +2,7 @@
 
 VidAI is a Python desktop application that generates structured notes from online videos using Gemini AI. It features a simple graphical user interface (GUI) built with Tkinter, lets you choose your preferred note-taking style and Gemini model, and saves your notes to a file. The app handles video downloading, AI interaction, and note formatting automatically.
 
-<!-- <img src="" alt="VidAI Demo" width="1000"/> -->
+<img src="https://github.com/user-attachments/assets/aab89f72-6a93-4cae-be7b-d1779b03abe9" alt="VidAI Demo" width="1000"/>
 
 ## Prerequisites
 
